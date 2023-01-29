@@ -1,17 +1,18 @@
 import { Controller } from 'egg';
 
-export default class NspController extends Controller {
-  public async exchange() {
+class NspController extends Controller {
+  async exchange() {
     const { ctx, app } = this;
-    const nsp = app.io.of('/');
+    console.log('aaaaaaaaaaa');
+    const nsp = app.io.of('/io');
     const message = ctx.args[0] || {};
     const socket = ctx.socket;
     const client = socket.id;
-
+    console.log('nsp----', nsp);
+    socket.emit('gbmsg', message);
     try {
       const { target, payload } = message;
       if (!target) return;
-      // 格式化数据
       const msg = ctx.helper.parseMsg('exchange', payload, { client, target });
       nsp.emit(target, msg);
     } catch (error) {
@@ -19,3 +20,5 @@ export default class NspController extends Controller {
     }
   }
 }
+
+module.exports = NspController;

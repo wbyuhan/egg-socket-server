@@ -1,4 +1,3 @@
-
 import { Application } from 'egg';
 
 module.exports = (app: Application) => {
@@ -17,6 +16,12 @@ module.exports = (app: Application) => {
         },
         message: '${v} is not a valid phone number!',
       },
+    },
+    token: {
+      type: String,
+    },
+    password: {
+      type: String,
     },
 
   });

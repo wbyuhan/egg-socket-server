@@ -14,6 +14,8 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
+import 'egg-cors';
+import 'egg-jwt';
 import 'egg-mongoose';
 import 'egg-socket.io';
 import { EggPluginItem } from 'egg';
@@ -31,6 +33,8 @@ declare module 'egg' {
     static?: EggPluginItem;
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
+    cors?: EggPluginItem;
+    jwt?: EggPluginItem;
     mongoose?: EggPluginItem;
     io?: EggPluginItem;
   }

@@ -1,4 +1,3 @@
-
 import { Application } from 'egg';
 
 export default (app: Application) => {
@@ -6,6 +5,7 @@ export default (app: Application) => {
 
   router.get('/', controller.home.index);
   // socket.io
-  io.of('/').route('server', io.controller.nsp.exchange);
-  router.post('/add', controller.user.add);
+  io.of('/').route('message', io.controller.nsp.exchange);
+  router.post('/registered', controller.user.registered);
+  router.post('/login', controller.user.login);
 };

@@ -7,6 +7,7 @@ declare module 'egg' {
         io: EggIOServer & EggSocketIO & EggSocketNameSpace;
         mongooseDB:any;
         mongoose: any;
+        jwt:any
     }
     interface Context {
         socket: Socket;

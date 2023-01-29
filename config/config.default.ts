@@ -1,11 +1,3 @@
-/*
- * @Author: webyuhan lcs1938083426@gmail.com
- * @Date: 2023-01-28 09:37:53
- * @LastEditors: webyuhan lcs1938083426@gmail.com
- * @LastEditTime: 2023-01-28 12:37:31
- * @FilePath: \egg-socket-server\config\config.default.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 
 export default (appInfo: EggAppInfo) => {
@@ -30,7 +22,27 @@ export default (appInfo: EggAppInfo) => {
       enable: false,
       ignoreJSON: true,
     },
-    domainWhiteList: [ '*' ],
+    domainWhiteList: [ '*', 'http://localhost:3000' ],
+  };
+  //
+  config.jwt = {
+    secret: '123456', // 自定义token的加密条件字符串，可按各自的需求填写
+    ignore: [ '/registered', '/login' ], // 哪些请求不需要认证
+    // enable: true, // default is false
+    // match: '/jwt', // optional
+    // expiresIn: '24h',
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    credentials: true,
+  };
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 7001,
+      hostname: '0.0.0.0',
+    },
   };
 
   // add your special config in here
@@ -39,9 +51,9 @@ export default (appInfo: EggAppInfo) => {
     io: {
       init: {},
       namespace: {
-        '/io': {
-          connectionMiddleware: [ 'auth' ],
-          packetMiddleware: [],
+        '/': {
+          connectionMiddleware: [ 'connection' ],
+          packetMiddleware: [ 'packet' ],
         },
       },
     },
